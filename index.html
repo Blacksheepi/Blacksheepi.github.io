@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -83,11 +83,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###写在前面：<br>刚来到公司实习，公司刚开始开发了一个完整的微信公众号的服务，后来出了小程序后，要把微信公众号的h5页面在小程序上也实现，功能和页面的样式都保持和h5一样，基于这样的需求来总结一下微信从h5到小程序的转化过程。</p>
-<p>##小程序和公众号<br>从这两者扮演的角色来看，公众号服务于营销和信息传递，而小程序面向产品与服务，因此小程序承担更多和用户交互的功能。从技术角度，h5是一个开放标准规范，而小程序是封闭的，只能在微信里运行，而且有自己独特的标准。</p>
-<p>###小程序特性</p>
-<p>####小程序有自己的开发框架<br>框架提供了自己的视图层描述语言 WXML 和 WXSS，以及基于 JavaScript 的逻辑层框架，并在视图层与逻辑层间提供了数据传输和事件系统，可以让开发者可以方便的聚焦于数据与逻辑上。<br>其中WXML对应html视图界面，WXSS对应CSS样式，JS框架主要提供了逻辑层和视图层的数据绑定，框架也管理了小程序的页面路由，管理页面的生命周期。开发者只需将页面的数据，方法和声明周期函数注册进框架中，然后由框架来处理剩下的工作。</p>
-<p>####小程序组件<br>这里的组件和我们一般在JS框架里说的组件不是同一个概念，这里的组件是视图层的基本组成单元。<strong>即和html页面中的元素相对应</strong>，不过是在微信这个平台的实现，以达到小程序接近原生APP的体验。两者较大的区别如下 ：</p>
+        <p>###写在前面:###<br>刚来到公司实习，公司刚开始开发了一个完整的微信公众号的服务，后来出了小程序后，要把微信公众号的h5页面在小程序上也实现，功能和页面的样式都保持和h5一样，基于这样的需求来总结一下微信从h5到小程序的转化过程。</p>
+<p>##小程序和公众号##<br>从这两者扮演的角色来看，公众号服务于营销和信息传递，而小程序面向产品与服务，因此小程序承担更多和用户交互的功能。从技术角度，h5是一个开放标准规范，而小程序是封闭的，只能在微信里运行，而且有自己独特的标准。</p>
+<p>###小程序特性###</p>
+<p>####小程序有自己的开发框架 ####<br>框架提供了自己的视图层描述语言 WXML 和 WXSS，以及基于 JavaScript 的逻辑层框架，并在视图层与逻辑层间提供了数据传输和事件系统，可以让开发者可以方便的聚焦于数据与逻辑上。<br>其中WXML对应html视图界面，WXSS对应CSS样式，JS框架主要提供了逻辑层和视图层的数据绑定，框架也管理了小程序的页面路由，管理页面的生命周期。开发者只需将页面的数据，方法和声明周期函数注册进框架中，然后由框架来处理剩下的工作。</p>
+<p>####小程序组件####<br>这里的组件和我们一般在JS框架里说的组件不是同一个概念，这里的组件是视图层的基本组成单元。<strong>即和html页面中的元素相对应</strong>，不过是在微信这个平台的实现，以达到小程序接近原生APP的体验。两者较大的区别如下 ：</p>
 <ul>
 <li>WXML语言必须包括开始标签和结束标签</li>
 <li>没有div标签，可用view组件代替</li>
@@ -102,7 +102,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cj7osaf9i0001n5wbrmqla1ay" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cj7osd16u00016qwbf116acvc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cj7osaf9d0000n5wb35yuh0a5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cj7osd16p00006qwbyt5oo32l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +182,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -207,7 +207,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
