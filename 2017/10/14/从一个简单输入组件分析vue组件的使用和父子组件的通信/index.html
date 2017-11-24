@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6语法简介 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="注：翻译自babel 箭头函数语法新的语法12如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。 // Expression bodiesvar odds = evens.map(v =&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6语法简介">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注：翻译自babel 箭头函数语法新的语法12如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。 // Expression bodiesvar odds = evens.map(v =&amp;g">
+<meta property="og:updated_time" content="2017-10-15T08:14:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6语法简介">
+<meta name="twitter:description" content="注：翻译自babel 箭头函数语法新的语法12如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。 // Expression bodiesvar odds = evens.map(v =&amp;g">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-从一个简单输入组件分析vue组件的使用和父子组件的通信" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" class="article-date">
+  <time datetime="2017-10-14T13:37:06.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6语法简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>注：翻译自babel</p>
+<h3 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h3><p>新的语法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。</div><div class="line">由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。</div></pre></td></tr></table></figure></p>
+<p>// Expression bodies<br>var odds = evens.map(v =&gt; v + 1);<br>var nums = evens.map((v, i) =&gt; v + i);</p>
+<p>// Statement bodies<br>nums.forEach(v =&gt; {<br>  if (v % 5 === 0)<br>    fives.push(v);<br>});</p>
+<p>// Lexical this<br>var bob = {<br>  _name: “Bob”,<br>  _friends: [],<br>  printFriends() {<br>    this._friends.forEach(f =&gt;<br>      console.log(this._name + “ knows “ + f));<br>  }<br>};</p>
+<p>// Lexical arguments<br>function square() {<br>  let example = () =&gt; {<br>    let numbers = [];<br>    for (let number of arguments) {<br>      numbers.push(number * number);<br>    }</p>
+<pre><code>return numbers;
+</code></pre><p>  };</p>
+<p>  return example();<br>}</p>
+<p>square(2, 4, 7.5, 8, 11.5, 21); // returns: [4, 16, 56.25, 64, 132.25, 441]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 类</div><div class="line">新增的类语法支持类的继承，super调用，实例，静态方法和构造函数</div></pre></td></tr></table></figure></p>
+<p>class SkinnedMesh extends THREE.Mesh {<br>  constructor(geometry, materials) {<br>    super(geometry, materials);</p>
+<pre><code>this.idMatrix = SkinnedMesh.defaultMatrix();
+this.bones = [];
+this.boneMatrices = [];
+//...
+</code></pre><p>  }<br>  update(camera) {<br>    //…<br>    super.update();<br>  }<br>  static defaultMatrix() {<br>    return new THREE.Matrix4();<br>  }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 改进的对象字面量表示法</div><div class="line">改进后的对象字面量表示法支持设置prototype，```foo: foo```赋值的简写形式。</div></pre></td></tr></table></figure></p>
+<p>var obj = {<br>    // Sets the prototype. “<strong>proto</strong>“ or ‘<strong>proto</strong>‘ would also work.<br>    <strong>proto</strong>: theProtoObj,<br>    // Computed property name does not set prototype or trigger early error for<br>    // duplicate <strong>proto</strong> properties.</p>
+<pre><code>[&apos;__proto__&apos;]: somethingElse,
+// Shorthand for ‘handler: handler’
+handler,
+// Methods
+toString() {
+ // Super calls
+ return &quot;d &quot; + super.toString();
+},
+// Computed (dynamic) property names
+[ &quot;prop_&quot; + (() =&gt; 42)() ]: 42
+</code></pre><p>};<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 模板字符串</div><div class="line">模板字符串为构造字符串提供语法糖。模板字符串（template string）是增强版的字符串，用反引号（\`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。模板字符串中嵌入变量，需要将变量名写在```$&#123;&#125;```之中。大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。模板字符串之中还能调用函数。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。</div></pre></td></tr></table></figure></p>
+<p>// Basic literal string creation<br><code>This is a pretty little template string.</code></p>
+<p>// Multiline strings<br><code>In ES5 this is
+ not legal.</code></p>
+<p>// Interpolate variable bindings<br>var name = “Bob”, time = “today”;<br><code>Hello ${name}, how are you ${time}?</code></p>
+<p>// Unescaped template strings<br>String.raw<code>In ES5 &quot;\n&quot; is a line-feed.</code></p>
+<p>// Construct an HTTP request prefix is used to interpret the replacements and construction<br>GET<code>http://foo.org/bar?a=${a}&amp;b=${b}
+    Content-Type: application/json
+    X-Credentials: ${credentials}
+    { &quot;foo&quot;: ${foo},
+      &quot;bar&quot;: ${bar}}</code>(myOnReadyStateChangeHandler);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">### 解构</div><div class="line">用途：</div><div class="line"></div><div class="line">* 交互变量的值，``` [x, y] = [y, x]</div></pre></td></tr></table></figure></p>
+<ul>
+<li>函数可以返回多个值，放在一个数组中，用解构取出来很方便</li>
+<li>函数的参数可以使用解构方便地将变量对应起来</li>
+<li>提取JSON数据</li>
+<li>函数参数的默认值</li>
+<li>使用<figure class="highlight plain"><figcaption><span>value]```和```for...of```遍历```Map```解构</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 加载模块的特定属性或方法</div></pre></td></tr></table></figure></li>
+</ul>
+<p>// list matching<br>var [a, ,b] = [1,2,3];<br>a === 1;<br>b === 3;</p>
+<p>// object matching<br>var { op: a, lhs: { op: b }, rhs: c }<br>       = getASTNode()</p>
+<p>// object matching shorthand<br>// binds <code>op</code>, <code>lhs</code> and <code>rhs</code> in scope<br>var {op, lhs, rhs} = getASTNode()</p>
+<p>// Can be used in parameter position<br>function g({name: x}) {<br>  console.log(x);<br>}<br>g({name: 5})</p>
+<p>// Fail-soft destructuring<br>var [a] = [];<br>a === undefined;</p>
+<p>// Fail-soft destructuring with defaults<br>var [a = 1] = [];<br>a === 1;</p>
+<p>// Destructuring + defaults arguments<br>function r({x, y, w = 10, h = 10}) {<br>  return x + y + w + h;<br>}<br>r({x:1, y:2}) === 23<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">### 函数传入参数形式改进</div></pre></td></tr></table></figure></p>
+<p>function f(x, y=12) {<br>  // y is 12 if not passed (or passed as undefined)<br>  return x + y;<br>}<br>f(3) == 15</p>
+<p>function f(x, …y) {<br>  // y is an Array<br>  return x * y.length;<br>}<br>f(3, “hello”, true) == 6</p>
+<p>function f(x, y, z) {<br>  return x + y + z;<br>}<br>// Pass each elem of array as argument<br>f(…[1,2,3]) == 6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### let和const</div><div class="line">使用let定义的变量具有块级作用域，并且与var不同的是，var声明的变量存在变量提升，即可以在声明前使用变量，但值为undefined，而使用let，必须先声明后使用，否则报错ReferenceError。</div></pre></td></tr></table></figure></p>
+<p>function f() {<br>  {<br>    let x;<br>    {<br>      // this is ok since it’s a block scoped name<br>      const x = “sneaky”;<br>      // error, was just defined with <code>const</code> above<br>      x = “foo”;<br>    }<br>    // this is ok since it was declared with <code>let</code><br>    x = “bar”;<br>    // error, already declared above in this block<br>    let x = “inner”;<br>  }<br>}<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjadpovf60003c9ogmdr9u6yi" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/24/前端框架带来的改变/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          前端框架带来的改变
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/21/小程序自建组件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">小程序自建组件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/24/前端框架带来的改变/">前端框架带来的改变</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/">ES6语法简介</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/21/小程序自建组件/">小程序自建组件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/20/使用hexo将博客post到github-io/">使用hexo将博客post到github.io</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/17/从微信公众号H5页面生成对应的小程序页面/">从微信公众号H5页面生成对应的小程序页面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

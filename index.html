@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,186 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-前端框架带来的改变" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/24/前端框架带来的改变/" class="article-date">
+  <time datetime="2017-11-24T06:15:09.000Z" itemprop="datePublished">2017-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/24/前端框架带来的改变/">前端框架带来的改变</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前端框架带来的改变"><a href="#前端框架带来的改变" class="headerlink" title="前端框架带来的改变"></a>前端框架带来的改变</h3><h5 id="web端的兴起"><a href="#web端的兴起" class="headerlink" title="web端的兴起"></a>web端的兴起</h5><p>传统的前端开发，是由HTML,CSS和JS来组成的，HTML控制网页结构，CSS改变样式，JS提供和用户的交互功能。web端相比于桌面应用和app，首先是跨平台的，其次，每次app的改版必须是要下载和安装新的软件包的，而频繁的更迭版本带来的用户体验是很差的，而web端相对用户来说只需一个链接，更轻量化和灵活。web端的内容也容易被分享和传播，而且可以被搜索引擎索引，这些也都是app所达不到的。</p>
+<h5 id="为什么会出现前端框架"><a href="#为什么会出现前端框架" class="headerlink" title="为什么会出现前端框架"></a>为什么会出现前端框架</h5><p>在用web端来实现app的功能时，web网页不再是展示的作用，而更多的承担和用户交互的功能。在web开发中我们使用JS来响应用户的点击，输入等操作，在JS中操作DOM树来更新视图。但对于交互要求很频繁的网页，开发的过程会遇到如下问题：</p>
+<ul>
+<li>大量对DOM的操作</li>
+<li>重复性地实现相似的功能</li>
+<li>代码不能复用</li>
+</ul>
+<p>因此，框架的出现就是为了解决这些问题。首先，将数据和视图绑定，视图的更新不再依赖于编写JS代码来手动改变DOM树的方式来改变视图，而是，通过视图和数据绑定后，框架监测数据的变化，来自动更新视图。开发人员现在只需关注对数据的操作，由此带来的视图变化由框架自动来完成。其次，出现了组件，组件是将一些独立的功能和视图模块封装起来，实现了代码的复用，并提高代码的可维护性。</p>
+<h5 id="使用框架给开发者带来的变化"><a href="#使用框架给开发者带来的变化" class="headerlink" title="使用框架给开发者带来的变化"></a>使用框架给开发者带来的变化</h5><p>在没有框架之前，都是在服务器端把页面渲染好再传到前端显示，使用了框架后，页面渲染在前端完成，后台要做的只是响应前端的数据请求，以json的形式将数据发送给前端即可。</p>
+<h5 id="框架和webpack"><a href="#框架和webpack" class="headerlink" title="框架和webpack"></a>框架和webpack</h5><p>由于单文件组件的出现，我们将HTML，JS，CSS都写在一个文件中，这个文件会有一个特殊的后缀名，如vue的<code>.vue</code>文件。这样的特殊后缀名的文件浏览器是不能识别的。因此，我们就需要类似webpack之类的工具处理一下，把它当中的内容提取出来。而webpack实际上是一个模块打包工具。采用模块化的思想可以编写复杂的应用，而JS在ES6之前还不能支持模块化。使用webpack可以分析你的项目的结构，找出模块之间的依赖关系，打包为可被浏览器识别的文件。而且，在打包的过程中也可以对项目中的文件做一些处理，比如使用bable将es6的语法转化为es5，一些CSS预处理文件的编译，图片的压缩和转化等。使用webpack可以很大程度的提高构建时的效率，实现前端构建的自动化。</p>
+<h5 id="使用webpack-dev-server"><a href="#使用webpack-dev-server" class="headerlink" title="使用webpack-dev-server"></a>使用webpack-dev-server</h5><p>在开发的过程中，要不断修改源码并要在浏览器看到效果，每次修改完都使用webpack重新打包一遍，对于大型的项目来说，这个时间时很长的。而且由于要频繁的改动，长时间的等待是无法容忍的。使用了webpack-dev-server，可以自动监听文件的修改，并重新打包。打包后的文件是放在内存当中的，而且可以启用Hot Module Replacement功能，这样打包的时候只会替换修改了的模块。极大的缩短了重新打包的时间。而且它提供了一个小型的node服务器，可以向浏览器发送静态资源，因此，前端项目可以直接运行并在浏览器看到效果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjadpovf50002c9og0zugm1p9" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-从一个简单输入组件分析vue组件的使用和父子组件的通信" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" class="article-date">
+  <time datetime="2017-10-14T13:37:06.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/">ES6语法简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>注：翻译自babel</p>
+<h3 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h3><p>新的语法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。</div><div class="line">由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。</div></pre></td></tr></table></figure></p>
+<p>// Expression bodies<br>var odds = evens.map(v =&gt; v + 1);<br>var nums = evens.map((v, i) =&gt; v + i);</p>
+<p>// Statement bodies<br>nums.forEach(v =&gt; {<br>  if (v % 5 === 0)<br>    fives.push(v);<br>});</p>
+<p>// Lexical this<br>var bob = {<br>  _name: “Bob”,<br>  _friends: [],<br>  printFriends() {<br>    this._friends.forEach(f =&gt;<br>      console.log(this._name + “ knows “ + f));<br>  }<br>};</p>
+<p>// Lexical arguments<br>function square() {<br>  let example = () =&gt; {<br>    let numbers = [];<br>    for (let number of arguments) {<br>      numbers.push(number * number);<br>    }</p>
+<pre><code>return numbers;
+</code></pre><p>  };</p>
+<p>  return example();<br>}</p>
+<p>square(2, 4, 7.5, 8, 11.5, 21); // returns: [4, 16, 56.25, 64, 132.25, 441]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 类</div><div class="line">新增的类语法支持类的继承，super调用，实例，静态方法和构造函数</div></pre></td></tr></table></figure></p>
+<p>class SkinnedMesh extends THREE.Mesh {<br>  constructor(geometry, materials) {<br>    super(geometry, materials);</p>
+<pre><code>this.idMatrix = SkinnedMesh.defaultMatrix();
+this.bones = [];
+this.boneMatrices = [];
+//...
+</code></pre><p>  }<br>  update(camera) {<br>    //…<br>    super.update();<br>  }<br>  static defaultMatrix() {<br>    return new THREE.Matrix4();<br>  }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 改进的对象字面量表示法</div><div class="line">改进后的对象字面量表示法支持设置prototype，```foo: foo```赋值的简写形式。</div></pre></td></tr></table></figure></p>
+<p>var obj = {<br>    // Sets the prototype. “<strong>proto</strong>“ or ‘<strong>proto</strong>‘ would also work.<br>    <strong>proto</strong>: theProtoObj,<br>    // Computed property name does not set prototype or trigger early error for<br>    // duplicate <strong>proto</strong> properties.</p>
+<pre><code>[&apos;__proto__&apos;]: somethingElse,
+// Shorthand for ‘handler: handler’
+handler,
+// Methods
+toString() {
+ // Super calls
+ return &quot;d &quot; + super.toString();
+},
+// Computed (dynamic) property names
+[ &quot;prop_&quot; + (() =&gt; 42)() ]: 42
+</code></pre><p>};<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 模板字符串</div><div class="line">模板字符串为构造字符串提供语法糖。模板字符串（template string）是增强版的字符串，用反引号（\`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。模板字符串中嵌入变量，需要将变量名写在```$&#123;&#125;```之中。大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。模板字符串之中还能调用函数。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。</div></pre></td></tr></table></figure></p>
+<p>// Basic literal string creation<br><code>This is a pretty little template string.</code></p>
+<p>// Multiline strings<br><code>In ES5 this is
+ not legal.</code></p>
+<p>// Interpolate variable bindings<br>var name = “Bob”, time = “today”;<br><code>Hello ${name}, how are you ${time}?</code></p>
+<p>// Unescaped template strings<br>String.raw<code>In ES5 &quot;\n&quot; is a line-feed.</code></p>
+<p>// Construct an HTTP request prefix is used to interpret the replacements and construction<br>GET<code>http://foo.org/bar?a=${a}&amp;b=${b}
+    Content-Type: application/json
+    X-Credentials: ${credentials}
+    { &quot;foo&quot;: ${foo},
+      &quot;bar&quot;: ${bar}}</code>(myOnReadyStateChangeHandler);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">### 解构</div><div class="line">用途：</div><div class="line"></div><div class="line">* 交互变量的值，``` [x, y] = [y, x]</div></pre></td></tr></table></figure></p>
+<ul>
+<li>函数可以返回多个值，放在一个数组中，用解构取出来很方便</li>
+<li>函数的参数可以使用解构方便地将变量对应起来</li>
+<li>提取JSON数据</li>
+<li>函数参数的默认值</li>
+<li>使用<figure class="highlight plain"><figcaption><span>value]```和```for...of```遍历```Map```解构</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 加载模块的特定属性或方法</div></pre></td></tr></table></figure></li>
+</ul>
+<p>// list matching<br>var [a, ,b] = [1,2,3];<br>a === 1;<br>b === 3;</p>
+<p>// object matching<br>var { op: a, lhs: { op: b }, rhs: c }<br>       = getASTNode()</p>
+<p>// object matching shorthand<br>// binds <code>op</code>, <code>lhs</code> and <code>rhs</code> in scope<br>var {op, lhs, rhs} = getASTNode()</p>
+<p>// Can be used in parameter position<br>function g({name: x}) {<br>  console.log(x);<br>}<br>g({name: 5})</p>
+<p>// Fail-soft destructuring<br>var [a] = [];<br>a === undefined;</p>
+<p>// Fail-soft destructuring with defaults<br>var [a = 1] = [];<br>a === 1;</p>
+<p>// Destructuring + defaults arguments<br>function r({x, y, w = 10, h = 10}) {<br>  return x + y + w + h;<br>}<br>r({x:1, y:2}) === 23<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">### 函数传入参数形式改进</div></pre></td></tr></table></figure></p>
+<p>function f(x, y=12) {<br>  // y is 12 if not passed (or passed as undefined)<br>  return x + y;<br>}<br>f(3) == 15</p>
+<p>function f(x, …y) {<br>  // y is an Array<br>  return x * y.length;<br>}<br>f(3, “hello”, true) == 6</p>
+<p>function f(x, y, z) {<br>  return x + y + z;<br>}<br>// Pass each elem of array as argument<br>f(…[1,2,3]) == 6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### let和const</div><div class="line">使用let定义的变量具有块级作用域，并且与var不同的是，var声明的变量存在变量提升，即可以在声明前使用变量，但值为undefined，而使用let，必须先声明后使用，否则报错ReferenceError。</div></pre></td></tr></table></figure></p>
+<p>function f() {<br>  {<br>    let x;<br>    {<br>      // this is ok since it’s a block scoped name<br>      const x = “sneaky”;<br>      // error, was just defined with <code>const</code> above<br>      x = “foo”;<br>    }<br>    // this is ok since it was declared with <code>let</code><br>    x = “bar”;<br>    // error, already declared above in this block<br>    let x = “inner”;<br>  }<br>}<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjadpovf60003c9ogmdr9u6yi" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小程序自建组件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/21/小程序自建组件/" class="article-date">
+  <time datetime="2017-09-20T16:25:20.000Z" itemprop="datePublished">2017-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/21/小程序自建组件/">小程序自建组件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="自建组件方法"><a href="#自建组件方法" class="headerlink" title="自建组件方法"></a>自建组件方法</h2><h2 id="小程序限制"><a href="#小程序限制" class="headerlink" title="小程序限制"></a>小程序限制</h2><h2 id="自建组件的特性分析"><a href="#自建组件的特性分析" class="headerlink" title="自建组件的特性分析"></a>自建组件的特性分析</h2><h2 id="自建组件变量作用域分析"><a href="#自建组件变量作用域分析" class="headerlink" title="自建组件变量作用域分析"></a>自建组件变量作用域分析</h2><h2 id="使用自建组件遇到的问题"><a href="#使用自建组件遇到的问题" class="headerlink" title="使用自建组件遇到的问题"></a>使用自建组件遇到的问题</h2><ul>
+<li>同一个页面有两个在不同地方引用的相同组件 </li>
+</ul>
+<blockquote>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjadpovfh0005c9ogf6hbxsy3" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用hexo将博客post到github-io" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cj7t8hbs70002z8wbf4rdl1xv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjadpovf30001c9ogflvmwncz" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -145,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cj7t8hbs50001z8wb4hob0yqu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjadpovez0000c9ogkjhru3et" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -190,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cj7t8hbrg0000z8wbcryfmish" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cjadpovfg0004c9ogs6y6jif2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -217,7 +397,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -225,9 +405,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/24/前端框架带来的改变/">前端框架带来的改变</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/">ES6语法简介</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/21/小程序自建组件/">小程序自建组件</a>
+          </li>
         
           <li>
             <a href="/2017/09/20/使用hexo将博客post到github-io/">使用hexo将博客post到github.io</a>
@@ -235,10 +427,6 @@
         
           <li>
             <a href="/2017/09/17/从微信公众号H5页面生成对应的小程序页面/">从微信公众号H5页面生成对应的小程序页面</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/17/hello-world/">Hello World</a>
           </li>
         
       </ul>
@@ -254,7 +442,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
