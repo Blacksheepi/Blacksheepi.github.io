@@ -61,6 +61,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-在CentOS7系统上安装和配置PostgreSQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" class="article-date">
+  <time datetime="2017-12-22T08:14:20.000Z" itemprop="datePublished">2017-12-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/">在CentOS7系统上安装和配置PostgreSQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装-使用root权限）"><a href="#安装-使用root权限）" class="headerlink" title="安装(使用root权限）"></a>安装(使用root权限）</h1><h3 id="添加RPM"><a href="#添加RPM" class="headerlink" title="添加RPM"></a>添加RPM</h3><figure class="highlight plain"><figcaption><span>install</span><a href="https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm```" target="_blank" rel="external">link</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 安装PostgreSQL9.5</div><div class="line">```yum install postgresql95-server postgresql95-contrib</div></pre></td></tr></table></figure>
+<h3 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/pgsql-9.5/bin/postgresql95-setup initdb</div></pre></td></tr></table></figure>
+<h3 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable postgresql-9.5.service</div></pre></td></tr></table></figure>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start postgresql-9.5.service</div></pre></td></tr></table></figure>
+<h1 id="设置账户和密码"><a href="#设置账户和密码" class="headerlink" title="设置账户和密码"></a>设置账户和密码</h1><p>出于安全性的考虑，postgresql不允许使用root账户对数据库操作。在安装完成后会自动在linux系统建立名为postgres的用户，在数据库中也会创建一个名为postgres的用户。由于密码是自动生成的，所以需要修改密码（注：修改的是数据库中postgres账户的密码！）</p>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>在执行postgres命令之前，需要先切换linux用户为postgres：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - postgres</div></pre></td></tr></table></figure></p>
+<p>切换成功后提示符变为<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">键入```psql -U postgres```使用postgres用户名登录数据库，</div><div class="line">也可直接使用```psql```命令登录，默认使用postgres用户名登录。</div><div class="line">进入数据库后提示符变为```postgres=#</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><figcaption><span>USER postgres WITH PASSWORD '123456'```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">修改postgres用户密码。</div><div class="line"># 数据库操作</div><div class="line">使用```psql```命令进入数据库后，常用操作命令如下：</div><div class="line"></div><div class="line">* ```\l```，列举出所有的数据库</div><div class="line">* ```\c dbname```，切换到名为dbname的数据库，相当于mysql的```use dbname</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>tables```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* ```\d tablename```，查看表的结构，相当于mysql的```desc tablename</div></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 导入/导出数据库</div><div class="line">### 导出</div><div class="line">```pg_dump dbname &gt; db.sql</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><figcaption><span>dbname -s > db.sql```只导出表结构，不导数据</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 导入</div><div class="line">```psql -U user -d dbname -f db.sql</div></pre></td></tr></table></figure>
+<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><p>安装成功后，在项目中连接数据时，会出现连不上数据库的情况，如果错误原因因为授权鉴定失败，那么还需设置下pg_hba.conf文件，文件所在的位置可能会有差异，在我的系统上是<code>/var/lib/pgsql/9.5/data/pg_hba.conf</code>路径下，如果不是，请使用<code>find / -name &#39;pg_hba.conf&#39;</code>命令全局查找。</p>
+<p>这个文件的主要作用是控制可访问的主机，可访问的用户，可访问哪一个数据库，以及验证的方法，验证方法默认为<code>ident</code>，修改为<code>password</code>即可使用用户名和密码方式访问，由于<code>password</code>是使用明文密码的方式，出于安全性的考虑，可使用<code>md5</code>加密访问</p>
+<p>修改完配置文件后，需要reload才能生效，使用命令<br><code>pg_ctl readload -D $PGDATA</code>，<br>其中<code>$PGDATA</code>全局变量存储数据库data的位置，是必须要指定的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjbhpuv6i0001l5ogj8sv2qz8" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-前端框架带来的改变" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/24/前端框架带来的改变/" class="article-date">
@@ -98,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjadpovf50002c9og0zugm1p9" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjbhpuv6n0003l5og79chojf1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -190,7 +244,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjadpovf60003c9ogmdr9u6yi" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjbhpuv6u0005l5og9107bx53" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -231,7 +285,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjadpovfh0005c9ogf6hbxsy3" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjbhpuv6w0006l5ogpb7mzwp1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -263,9 +317,9 @@ toString() {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="使用fexo和github-io搭建自己的博客"><a href="#使用fexo和github-io搭建自己的博客" class="headerlink" title="使用fexo和github.io搭建自己的博客"></a>使用fexo和github.io搭建自己的博客</h2><h2 id="搭建成功后常用的操作"><a href="#搭建成功后常用的操作" class="headerlink" title="搭建成功后常用的操作"></a>搭建成功后常用的操作</h2><h3 id="普通流程"><a href="#普通流程" class="headerlink" title="普通流程"></a>普通流程</h3><ul>
+        <h2 id="使用hexo和github-io搭建自己的博客"><a href="#使用hexo和github-io搭建自己的博客" class="headerlink" title="使用hexo和github.io搭建自己的博客"></a>使用hexo和github.io搭建自己的博客</h2><h2 id="搭建成功后常用的操作"><a href="#搭建成功后常用的操作" class="headerlink" title="搭建成功后常用的操作"></a>搭建成功后常用的操作</h2><h3 id="普通流程"><a href="#普通流程" class="headerlink" title="普通流程"></a>普通流程</h3><ul>
 <li>进入博客本地文件夹</li>
-<li>使用<code>fexo new</code>命令新建文章</li>
+<li>使用<code>hexo new</code>命令新建文章</li>
 <li>使用MarkDown编辑器编辑文章并预览效果</li>
 <li>运行<code>hexo clean</code>命令清除缓存（db.json）和generate files</li>
 <li>运行<code>hexo generate</code>命令生成静态文件</li>
@@ -275,7 +329,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjadpovf30001c9ogflvmwncz" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjbhpuv6c0000l5ogu3d8e8u5" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -325,7 +379,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjadpovez0000c9ogkjhru3et" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjbhpuv6p0004l5ogtw6100xx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -370,7 +424,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cjadpovfg0004c9ogs6y6jif2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/17/hello-world/" data-id="cjbhpuv6k0002l5oginar0yfi" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -397,7 +451,7 @@ toString() {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -408,6 +462,10 @@ toString() {
     <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/">在CentOS7系统上安装和配置PostgreSQL</a>
+          </li>
         
           <li>
             <a href="/2017/11/24/前端框架带来的改变/">前端框架带来的改变</a>
@@ -423,10 +481,6 @@ toString() {
         
           <li>
             <a href="/2017/09/20/使用hexo将博客post到github-io/">使用hexo将博客post到github.io</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/17/从微信公众号H5页面生成对应的小程序页面/">从微信公众号H5页面生成对应的小程序页面</a>
           </li>
         
       </ul>
