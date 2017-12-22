@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="安装(使用root权限）添加RPM1yum install https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm 安装PostgreSQL9.51yum install postgresql95-server postgresql95-contrib">
-<meta property="og:updated_time" content="2017-12-22T09:33:24.000Z">
+<meta property="og:updated_time" content="2017-12-22T09:45:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在CentOS7系统上安装和配置PostgreSQL">
 <meta name="twitter:description" content="安装(使用root权限）添加RPM1yum install https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm 安装PostgreSQL9.51yum install postgresql95-server postgresql95-contrib">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -91,16 +91,18 @@
 <h3 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable postgresql-9.5.service</div></pre></td></tr></table></figure>
 <h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start postgresql-9.5.service</div></pre></td></tr></table></figure>
 <h1 id="设置账户和密码"><a href="#设置账户和密码" class="headerlink" title="设置账户和密码"></a>设置账户和密码</h1><p>出于安全性的考虑，postgresql不允许使用root账户对数据库操作。在安装完成后会自动在linux系统建立名为postgres的用户，在数据库中也会创建一个名为postgres的用户。由于密码是自动生成的，所以需要修改密码（注：修改的是数据库中postgres账户的密码！）</p>
-<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>在执行postgres命令之前，需要先切换linux用户为postgres：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - postgres</div></pre></td></tr></table></figure></p>
-<p>切换成功后提示符变为<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">键入```psql -U postgres```使用postgres用户名登录数据库，</div><div class="line">也可直接使用```psql```命令登录，默认使用postgres用户名登录。</div><div class="line">进入数据库后提示符变为```postgres=#</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><figcaption><span>USER postgres WITH PASSWORD '123456'```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">修改postgres用户密码。</div><div class="line"># 数据库操作</div><div class="line">使用```psql```命令进入数据库后，常用操作命令如下：</div><div class="line"></div><div class="line">* ```\l```，列举出所有的数据库</div><div class="line">* ```\c dbname```，切换到名为dbname的数据库，相当于mysql的```use dbname</div></pre></td></tr></table></figure>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>在执行postgres命令之前，需要先切换linux用户为postgres：<code>su - postgres</code><br>切换成功后提示符变为<code>-bash-4.2$</code></p>
+<p>键入<code>psql -U postgres</code>使用postgres用户名登录数据库，<br>也可直接使用<code>psql</code>命令登录，默认使用postgres用户名登录。<br>进入数据库后提示符变为<code>postgres=#</code></p>
+<p><code>ALTER USER postgres WITH PASSWORD &#39;123456&#39;</code><br>修改postgres用户密码。</p>
+<h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><p>使用<code>psql</code>命令进入数据库后，常用操作命令如下：</p>
 <ul>
-<li><figure class="highlight plain"><figcaption><span>tables```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* ```\d tablename```，查看表的结构，相当于mysql的```desc tablename</div></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 导入/导出数据库</div><div class="line">### 导出</div><div class="line">```pg_dump dbname &gt; db.sql</div></pre></td></tr></table></figure>
-</li>
+<li><code>\l</code>，列举出所有的数据库</li>
+<li><code>\c dbname</code>，切换到名为dbname的数据库，相当于mysql的<code>use dbname</code></li>
+<li><code>\dt</code>，进入某个数据库后，列举出所有的表，相当于mysql的<code>show tables</code></li>
+<li><code>\d tablename</code>，查看表的结构，相当于mysql的<code>desc tablename</code></li>
+<li><code>\q</code>，退出登录，相当于mysql的<code>quit</code></li>
 </ul>
-<figure class="highlight plain"><figcaption><span>dbname -s > db.sql```只导出表结构，不导数据</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 导入</div><div class="line">```psql -U user -d dbname -f db.sql</div></pre></td></tr></table></figure>
+<h1 id="导入-导出数据库"><a href="#导入-导出数据库" class="headerlink" title="导入/导出数据库"></a>导入/导出数据库</h1><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plain"><figcaption><span>dbname > db.sql```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">`pg_dump dbname -s &gt; db.sql`只导出表结构，不导数据</div><div class="line">### 导入</div><div class="line">```psql -U user -d dbname -f db.sql</div></pre></td></tr></table></figure>
 <h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><p>安装成功后，在项目中连接数据时，会出现连不上数据库的情况，如果错误原因因为授权鉴定失败，那么还需设置下pg_hba.conf文件，文件所在的位置可能会有差异，在我的系统上是<code>/var/lib/pgsql/9.5/data/pg_hba.conf</code>路径下，如果不是，请使用<code>find / -name &#39;pg_hba.conf&#39;</code>命令全局查找。</p>
 <p>这个文件的主要作用是控制可访问的主机，可访问的用户，可访问哪一个数据库，以及验证的方法，验证方法默认为<code>ident</code>，修改为<code>password</code>即可使用用户名和密码方式访问，由于<code>password</code>是使用明文密码的方式，出于安全性的考虑，可使用<code>md5</code>加密访问</p>
 <p>修改完配置文件后，需要reload才能生效，使用命令<br><code>pg_ctl readload -D $PGDATA</code>，<br>其中<code>$PGDATA</code>全局变量存储数据库data的位置，是必须要指定的</p>
@@ -108,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjbhpxrh300056tog20ljjsb6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjbhqf4ac0004t7oge9zqqtmt" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -119,7 +121,7 @@
   
   
     <a href="/2017/11/24/前端框架带来的改变/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">前端框架带来的改变</div>
     </a>
   
@@ -152,7 +154,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -189,7 +191,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
