@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,70 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-JavaScript异步编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/06/JavaScript异步编程/" class="article-date">
+  <time datetime="2018-01-06T10:40:46.000Z" itemprop="datePublished">2018-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/06/JavaScript异步编程/">JavaScript异步编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文旨在介绍JavaScript中异步编程的实现和发展，是从遇到问题解决问题的过程，从最开始的<code>callback</code>到现在的<code>async/await</code>。从历史的顺序介绍事物的发展的过程可以使我们更好的理解。</p>
+<h1 id="JavaScript异步"><a href="#JavaScript异步" class="headerlink" title="JavaScript异步"></a>JavaScript异步</h1><p>代码是通过CPU一条一条执行的，但如果一条代码需要长时间的等待I/O资源，为了保证代码的顺序执行，CPU就不得不停下来等待。异步就是解决这个问题而提出的。异步是JavaScript的核心特性，js中的异步大多是遇到一个需要长时间等待I/O的任务，这时候js不会停下来去等这个任务完成，而是接着执行接下来的代码，等到这个任务的I/O的完成后再接着执行这个任务。</p>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><p>js对异步编程的实现，就是回调函数。回调函数是指，在一个任务等到I/O完成后再去执行的函数。要在等一个任务I/O完成后再去执行的代码就必须放在回调函数里面。但是当有多个异步任务时，就会出现回调函数嵌套回调函数的情况。而且在模块化编程中，回调函数必须在不同的模块之间传递，给代码维护造成的很大的困难。</p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>Promise是解决callback噩梦而提出的。</p>
+<p>首先，Promise是一个对象，它有以下三个状态：</p>
+<ul>
+<li>pending: 初始状态，成功或失败状态。</li>
+<li>fulfilled: 意味着操作成功完成。</li>
+<li>rejected: 意味着操作失败。</li>
+</ul>
+<p>Promise的构造函数接收一个<code>executor</code>函数作为参数，在这个<code>executor</code>函数中，可以执行异步代码，<code>executor</code>函数可以接收两个函数，一个是<code>resolve</code>函数，一个是<code>reject</code>函数。异步操作完成后会执行<code>resolve</code>函数，Promise将会由最初的pending状态转变为fulfilled状态。如果在执行异步操作的过程中发生错误，则会执行reject函数，Promise由pending状态转变为rejected状态。</p>
+<p>如下是一个Promise使用的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">let myFirstPromise = new Promise(function(resolve, reject)&#123;</div><div class="line">    //当异步代码执行成功时，我们才会调用resolve(...), 当异步代码失败时就会调用reject(...)</div><div class="line">    //在本例中，我们使用setTimeout(...)来模拟异步代码，实际编码时可能是XHR请求或是HTML5的一些API方法.</div><div class="line">    setTimeout(function()&#123;</div><div class="line">        resolve(&quot;成功!&quot;); //代码正常执行！</div><div class="line">    &#125;, 250);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">myFirstPromise.then(function(successMessage)&#123;</div><div class="line">    //successMessage的值是上面调用resolve(...)方法传入的值.</div><div class="line">    //successMessage参数不一定非要是字符串类型，这里只是举个例子</div><div class="line">    console.log(&quot;Yay! &quot; + successMessage);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我们将要等异步操作完成后执行的代码放在Promise.then函数中，它可以接收两个函数（分别是onfulfilled和onrejected）作为参数。<br>当Promise状态变为fulfilled时执行onfulfilled函数，状态变为rejected时执行onrejected函数。</p>
+<p>因为Promise.then函数会返回一个新的Promise对象。所以Promise可以链式执行。</p>
+<p>之前callback的思想是，如果一个函数A中含有异步操作，那么就必须将等待异步完成后执行的代码放在一个函数B中作为参数传给函数A。函数B是附着在A上的。 </p>
+<p>用了Promise后含有异步操作的函数返回一个Promise，异步执行完后要执行的函数B是放在Promise.then中的，实现了代码的分离。多重异步嵌套现在变为链式增长。</p>
+<h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Generator函数与普通函数的区别是，它可以暂停执行，交出函数的执行权。调用Generator函数会返回一个内部指针，调用指针的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句。next方法的作用是分阶段执行Generator函数。每次调用next方法，会返回一个对象，表示当前阶段的信息（value属性和done属性）value属性是yield语句后面表达式的值，表示当前阶段的值done属性是一个布尔值，表示Generator函数是否执行完毕，即是否还有下一个阶段。</p>
+<p>yield语句后一般跟一个Promise对象。</p>
+<p>一个Generator函数定义和使用的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//定义</div><div class="line">var fetch = require(&apos;node-fetch&apos;);</div><div class="line"></div><div class="line">function* gen()&#123;</div><div class="line">  var url = &apos;https://api.github.com/users/github&apos;;</div><div class="line">  var result = yield fetch(url);</div><div class="line">  console.log(result.bio);</div><div class="line">&#125;</div><div class="line">//使用</div><div class="line">var g = gen();</div><div class="line">var result = g.next();</div><div class="line"></div><div class="line">result.value.then(function(data)&#123;</div><div class="line">  return data.json();</div><div class="line">&#125;).then(function(data)&#123;</div><div class="line">  g.next(data);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>可以看到，虽然 Generator 函数将异步操作表示得很简洁，但是流程管理却不方便（即何时执行第一阶段、何时执行第二阶段）。因此出现了一些库函数来管理Generator函数。如：Thunk函数和co函数库。</p>
+<h1 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h1><p>async函数即是将Generator函数的星号（*）替换成async，将 yield 替换成await，然后自带执行器，所以async函数的执行，与普通函数一样。await跟generator函数中的yeild一样，后面只能跟一个Promise对象。<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function resolveAfter2Seconds(x) &#123; </div><div class="line">  return new Promise(resolve =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      resolve(x);</div><div class="line">    &#125;, 2000);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">async function f1() &#123;</div><div class="line">  var x = await resolveAfter2Seconds(10);</div><div class="line">  console.log(x); // 10</div><div class="line">&#125;</div><div class="line">f1();</div></pre></td></tr></table></figure>
+<p>如上的例子，现在，在异步函数f1中除了await，其他的代码都是像同步代码那样书写，没有其他的区别。</p>
+<p>在Promise中，异步操作成功后会执行resolve函数将Promise状态变为fulfilled。在Promise.then中异步操作成功后要执行的onfulfilled函数在Promise状态变为fulfilled后执行。</p>
+<p>而在async函数中，遇到await会等异步完成，异步操作成功后会执行resolve函数将结果返回。然后继续执行await后的代码，不用再在promise.then中执行异步成功后的代码。代码书写起来就是按顺序的，没有其他多余的操作。</p>
+<h1 id="最开始的封装"><a href="#最开始的封装" class="headerlink" title="最开始的封装"></a>最开始的封装</h1><p>需要注意的是async/await也是基于Promise的。而用Promise处理异步代码，最开始是要new一个Promise对象的。在这个对象中封装了一个异步。那么怎么知道这个异步什么时候完成呢，这里就只能用js原生的callback了。在callback中触发Promise的resolve函数，将Promise的状态变为fulfilled，这样就可以通知Promise链上的代码依次执行了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/06/JavaScript异步编程/" data-id="cjc45r39z000013je3593k4mw" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-在CentOS7系统上安装和配置PostgreSQL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -110,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjbhqhti30002f7ogur63coki" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjc45r3ae000513jelej63ls3" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -157,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjbhqhti10001f7ogewu9zik6" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjc45r3ag000613jehuauow5b" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -249,7 +313,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjbhqhtim0005f7oggvqbfba0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjc45r3a4000113jeru1k9zyi" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -290,7 +354,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjbhqhtik0004f7ogl5ti8viw" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjc45r3aa000413jemkvaj6si" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -334,7 +398,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjbhqhthw0000f7og28ibw3t5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjc45r3a9000313jesjwrwu1s" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -384,7 +448,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjbhqhtii0003f7og1gb1261m" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjc45r3a7000213jemlt8a77c" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -409,9 +473,9 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -419,9 +483,13 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/06/JavaScript异步编程/">JavaScript异步编程</a>
+          </li>
         
           <li>
             <a href="/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/">在CentOS7系统上安装和配置PostgreSQL</a>
@@ -439,10 +507,6 @@ toString() {
             <a href="/2017/09/21/小程序自建组件/">小程序自建组件</a>
           </li>
         
-          <li>
-            <a href="/2017/09/20/使用hexo将博客post到github-io/">使用hexo将博客post到github.io</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -455,8 +519,8 @@ toString() {
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
