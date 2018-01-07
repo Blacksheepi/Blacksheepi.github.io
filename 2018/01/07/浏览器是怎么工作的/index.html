@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浏览器是怎么工作的 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浏览器的主要组成部分 用户界面-包括地址栏，向前向后按钮，书签菜单等。 浏览器引擎-查询和操作渲染引擎的接口。 渲染引擎-作用是显示请求的资源，比如，如果请求的内容是HTML，那么它就负责解析HTML和CSS然后把解析的结果显示到屏幕上。 网络模块-发送网络请求，比如HTTP请求。 后端UI-绘制基础元素。它提供一个与平台无关的通用接口，在往下就是操作系统提供的用户接口方法。 JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器是怎么工作的">
+<meta property="og:url" content="http://yoursite.com/2018/01/07/浏览器是怎么工作的/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="浏览器的主要组成部分 用户界面-包括地址栏，向前向后按钮，书签菜单等。 浏览器引擎-查询和操作渲染引擎的接口。 渲染引擎-作用是显示请求的资源，比如，如果请求的内容是HTML，那么它就负责解析HTML和CSS然后把解析的结果显示到屏幕上。 网络模块-发送网络请求，比如HTTP请求。 后端UI-绘制基础元素。它提供一个与平台无关的通用接口，在往下就是操作系统提供的用户接口方法。 JavaScript">
+<meta property="og:updated_time" content="2018-01-07T02:43:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器是怎么工作的">
+<meta name="twitter:description" content="浏览器的主要组成部分 用户界面-包括地址栏，向前向后按钮，书签菜单等。 浏览器引擎-查询和操作渲染引擎的接口。 渲染引擎-作用是显示请求的资源，比如，如果请求的内容是HTML，那么它就负责解析HTML和CSS然后把解析的结果显示到屏幕上。 网络模块-发送网络请求，比如HTTP请求。 后端UI-绘制基础元素。它提供一个与平台无关的通用接口，在往下就是操作系统提供的用户接口方法。 JavaScript">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浏览器是怎么工作的" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/07/浏览器是怎么工作的/" class="article-date">
+  <time datetime="2018-01-07T02:42:20.000Z" itemprop="datePublished">2018-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浏览器是怎么工作的
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="浏览器的主要组成部分"><a href="#浏览器的主要组成部分" class="headerlink" title="浏览器的主要组成部分"></a>浏览器的主要组成部分</h2><ol>
+<li>用户界面-包括地址栏，向前向后按钮，书签菜单等。</li>
+<li>浏览器引擎-查询和操作渲染引擎的接口。</li>
+<li>渲染引擎-作用是显示请求的资源，比如，如果请求的内容是HTML，那么它就负责解析HTML和CSS然后把解析的结果显示到屏幕上。</li>
+<li>网络模块-发送网络请求，比如HTTP请求。</li>
+<li>后端UI-绘制基础元素。它提供一个与平台无关的通用接口，在往下就是操作系统提供的用户接口方法。</li>
+<li>JavaScript解释器-解析和执行JavaScript代码。</li>
+<li>数据存储-浏览器需要存各种数据在硬盘上，比如，cookies。</li>
+</ol>
+<h2 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>从网络层得到文档后，渲染引擎会先从解析HTML文档开始，把标签翻译为DOM节点，生成一个内容树(content tree)。解析CSS，得到的样式信息和之前的内容树结合生成渲染树(render tree)。渲染树经过布局(layout)处理，即确定每一个节点在屏幕上的位置后，就开始绘制(painting)，生成最终的页面。</p>
+<h3 id="处理scirpts和CSS的顺序"><a href="#处理scirpts和CSS的顺序" class="headerlink" title="处理scirpts和CSS的顺序"></a>处理scirpts和CSS的顺序</h3><h4 id="Scripts"><a href="#Scripts" class="headerlink" title="Scripts"></a>Scripts</h4><p>开发者会期望在解析时遇到<scripts>标签后，立刻解析和执行scripts（因为script执行可能会改变DOM结构）。同时，会停止解析文档直到script执行完后。如果script是引用外部文件，解析也会停止，直到外部文件被下载和执行完毕。但是开发者可以在script标签上添加<code>defer</code>属性，这样script会在文档解析完后再执行。另外，<code>async</code>属性使得外部script的解析和执行是在一个新的线程上，不停止文档的解析。</scripts></p>
+<h4 id="解析优化"><a href="#解析优化" class="headerlink" title="解析优化"></a>解析优化</h4><p>当执行script，会另起一个线程解析剩余的文档，加载外部引用的的资源。注意的是，它只会解析外部引用文件，如，外部scripts，外部CSS和图片等，不会修改DOM树。</p>
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><p>因为CSS不改变DOM树的结构，看起来没有理由要等CSS解析而停止文档的解析。但会存在一个问题，如果scripts在文档解析阶段需要请求样式信息，如果CSS还没被加载和解析，那么scirpts就会因为得不到结果而产生一系列的问题。看起来极端的情况却是经常出现的。Firefox会阻塞所有scripts当还有CSS正在被加载和解析时。Webkit只当scripts试图访问特定的样式信息时阻塞他们。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/07/浏览器是怎么工作的/" data-id="cjc46buy10006efjew327va9i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/07/webpack使用和配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack使用和配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/07/浏览器是怎么工作的/">浏览器是怎么工作的</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/07/webpack使用和配置/">webpack使用和配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/06/JavaScript异步编程/">JavaScript异步编程</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/">在CentOS7系统上安装和配置PostgreSQL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/24/前端框架带来的改变/">前端框架带来的改变</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
