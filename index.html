@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,65 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-webpack使用和配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/07/webpack使用和配置/" class="article-date">
+  <time datetime="2018-01-07T02:40:13.000Z" itemprop="datePublished">2018-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/07/webpack使用和配置/">webpack使用和配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="准备入口文件"><a href="#准备入口文件" class="headerlink" title="准备入口文件"></a>准备入口文件</h3><p>在webpack开始打包之前我们需要一个入口文件，来告诉webpack从哪里开始构建它的依赖图(dependency graph)。例如对于vue单页面应用来说，通常会在这个文件引入整个项目的全局依赖包，如，vue，vue-router,vuex等，还有页面入口，一般为App.vue。然后在这个文件中新建vue实例，挂载到App页面上，并设置路由等。</p>
+<h3 id="使用配置文件"><a href="#使用配置文件" class="headerlink" title="使用配置文件"></a>使用配置文件</h3><p>虽然我们在命令行中运行webpack命令并提供参数来打包，但对于复杂的启动项来说，使用配置文件可以使我们不需要每次打包都执行很长的一串命令。<br>下面是一个最基本的配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const path = require(&apos;path&apos;);</div><div class="line"></div><div class="line">module.exports = &#123;</div><div class="line">  entry: &apos;./src/index.js&apos;,</div><div class="line">  output: &#123;</div><div class="line">    filename: &apos;bundle.js&apos;,</div><div class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在上面的例子中，入口文件为src目录下的<code>index.js</code>文件，打包后的结果为dist目录下的<code>bundle.js</code>文件。</p>
+<p>基本的配置文件一般命名为<code>webpack.config.js</code>，若要区分开发环境和生产环境，会分开配置，分为一个基本的配置文件<code>webpack.base.conf.js</code>，开发环境下的配置<code>webpack.dev.conf.js</code>，生产环境下的配置<code>webpack.prod.conf.js</code>。当然，文件名可以根据自己的喜好来命名，但应表明文件的用途。</p>
+<h3 id="使用NPM-script"><a href="#使用NPM-script" class="headerlink" title="使用NPM script"></a>使用NPM script</h3><p>在<code>package.json</code>中为我们的webpack命令设置别名吧，这样，只需运行<code>npm run dev</code>或者<code>npm run build</code>即可运行或build项目。</p>
+<h3 id="管理静态文件"><a href="#管理静态文件" class="headerlink" title="管理静态文件"></a>管理静态文件</h3><p>因为webpack只能识别js文件，但可以通过<code>loader</code>来加载非js文件并做一些处理。通常，</p>
+<ul>
+<li>使用<code>style-loader</code>和<code>css-loader</code>来加载CSS文件</li>
+<li>使用<code>url-loader</code>加载图片，音频，视频，字体等文件。也可使用<code>file-loader</code>，但<code>url-loader</code>会将小于一定比特的文件使用<code>base64</code>编码嵌入到文档中，从而减少网络请求。</li>
+<li>若在开发中使用ES6/7语法，需使用<code>babel-loader</code>将js转化为更被浏览器广泛支持的ES5语法。<h3 id="输出管理"><a href="#输出管理" class="headerlink" title="输出管理"></a>输出管理</h3>对于单页面应用，只需要在用户第一次请求的时候返回一个HTML文件，而在这个HTML文件中，需要把webpack打包后的js文件引入，使用HtmlWebpackPlugin插件可以自动的替我们完成这项工作。<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3>在开发环境下，我们一般是在本地服务器上开发，由于需要不断的调试，我们希望打包后还能对应出源文件结构从而定位出bug所在的位置，所以我们需要精确的<code>source map</code>。当我们修改完后还需要等webpack重新打包完后才能看到更改后效果。所以我们需要尽可能短的打包时间。如果能每当我们修改并保存后，webpack就能自动重新打包（只打包修改后的模块）并在浏览器自动加载修改后的结果就更好了。幸运的是，这些webpack都可以替我们做到。</li>
+</ul>
+<h5 id="使用webpack-dev-server"><a href="#使用webpack-dev-server" class="headerlink" title="使用webpack-dev-server"></a>使用webpack-dev-server</h5><p> <code>webpack-dev-server</code> 提供一个简单的Node服务器，保存后浏览器自动重载。并且可以在配置中开启HMR，只重新构建修改了的模块，极大缩短了重新构建所需的时间。</p>
+<h3 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h3><p>在生产环境中，我们的目标转换为尽可能减少构建后的代码，不需要很精确的<code>source maps</code>。<br>使用<code>UglifyJSPlugin</code>插件压缩构建后的代码。</p>
+<h3 id="指定环境"><a href="#指定环境" class="headerlink" title="指定环境"></a>指定环境</h3><p>使用webpack自带的<code>DefinePlugin</code>插件指定生产环境和开发环境。如，在生产环境下的vue会添加很多错误提示和辅助信息使得调试变得更容易些。而在生产环境为了减少包的大小，这些错误提示是不应该包含进来的。</p>
+<h3 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h3><p>有三种常用的分割代码的方法：</p>
+<ul>
+<li>通过指定多个入口文件</li>
+<li>使用<code>CommonChunkPlugin</code>插件提取出公用的代码</li>
+<li>使用<code>import()</code>或<code>require.ensure</code>动态导入模块<h3 id="使用缓存"><a href="#使用缓存" class="headerlink" title="使用缓存"></a>使用缓存</h3>当用户第一次请求资源并下载到本地后，把资源缓存起来，而当用户再次请求相同的资源时，就可以利用本地缓存的文件。</li>
+</ul>
+<p>但是怎么分辨出资源是否没有变化呢，通过资源名字的变化是一个很好的方法。因此，我们可以给打包后的文件名字添加<code>[hash]</code>或<code>[chunkhash]</code>子字段来辨别资源的变化。</p>
+<p>在之前除了可以使用<code>CommonsChunkPlugin</code>提取出第三方的库代码外，还可以提取出<code>webpack runtime</code>和<code>module manifest</code>，因为这两个在每次构建的时候都会变化。这样在重新构建的时候引用的第三发库代码的hash值就不会发生变化。</p>
+<p>然而，会出现一种情况，当我们添加一个新的模块再次重新构建后，发现提取出的第三方的库代码的hash值也发生的变化。原因是<code>module.id</code>发生的变化。这种情况可以通过<code>NameModulesPlugin</code>或<code>HashedModuleIdsPlugin</code>插件来解决。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/07/webpack使用和配置/" data-id="cjc469hpx0001w4jed4shmso6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-JavaScript异步编程" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/06/JavaScript异步编程/" data-id="cjc45r39z000013je3593k4mw" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2018/01/06/JavaScript异步编程/" data-id="cjc469hps0000w4jet63oj3ah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjc45r3ae000513jelej63ls3" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjc469hq70006w4je9l2eh76v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjc45r3ag000613jehuauow5b" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjc469hq50005w4jeoe2j9g4t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -313,7 +372,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjc45r3a4000113jeru1k9zyi" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjc469hpz0002w4jetrbloy2r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +413,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjc45r3aa000413jemkvaj6si" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjc469hq80007w4jeoy6cxlfh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,7 +457,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjc45r3a9000313jesjwrwu1s" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjc469hq30004w4jed9pv8bq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +507,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjc45r3a7000213jemlt8a77c" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjc469hq00003w4je3x58msq8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -473,7 +532,7 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
@@ -483,9 +542,13 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/07/webpack使用和配置/">webpack使用和配置</a>
+          </li>
         
           <li>
             <a href="/2018/01/06/JavaScript异步编程/">JavaScript异步编程</a>
@@ -501,10 +564,6 @@ toString() {
         
           <li>
             <a href="/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/">ES6语法简介</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/21/小程序自建组件/">小程序自建组件</a>
           </li>
         
       </ul>
