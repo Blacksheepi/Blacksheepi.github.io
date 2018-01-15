@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS-каналы"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Поиск"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -100,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/07/浏览器是怎么工作的/" data-id="cjc46buy10006efjew327va9i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/07/浏览器是怎么工作的/" data-id="cjcg088hq0008z4ogx7xqhd0k" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -159,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/07/webpack使用和配置/" data-id="cjc46buxc0001efjevqu3gsrt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/07/webpack使用和配置/" data-id="cjcg088h50000z4og9u0nmi4f" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -223,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/06/JavaScript异步编程/" data-id="cjc46bux70000efjejyvennkn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/06/JavaScript异步编程/" data-id="cjcg088ha0001z4ogcykq30ib" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -277,12 +277,15 @@
 <h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psql -U user -d dbname -f db.sql</div></pre></td></tr></table></figure>
 <h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><p>安装成功后，在项目中连接数据时，会出现连不上数据库的情况，如果错误原因因为授权鉴定失败，那么还需设置下pg_hba.conf文件，文件所在的位置可能会有差异，在我的系统上是<code>/var/lib/pgsql/9.5/data/pg_hba.conf</code>路径下，如果不是，请使用<code>find / -name &#39;pg_hba.conf&#39;</code>命令全局查找。</p>
 <p>这个文件的主要作用是控制可访问的主机，可访问的用户，可访问哪一个数据库，以及验证的方法，验证方法默认为<code>ident</code>，修改为<code>password</code>即可使用用户名和密码方式访问，由于<code>password</code>是使用明文密码的方式，出于安全性的考虑，可使用<code>md5</code>加密访问</p>
-<p>修改完配置文件后，需要reload才能生效，使用命令<br><code>pg_ctl readload -D $PGDATA</code>，<br>其中<code>$PGDATA</code>全局变量存储数据库data的位置，是必须要指定的</p>
+<p>修改完配置文件后，需要restart才能生效，进入/usr/pgsql-9.5/bin文件夹，使用命令<br><code>./pg_ctl restart -D $PGDATA</code>，<br>其中<code>$PGDATA</code>全局变量存储数据库data的位置，是必须要指定的</p>
+<h3 id="允许远程连接"><a href="#允许远程连接" class="headerlink" title="允许远程连接"></a>允许远程连接</h3><p>同样在<code>pg_hba.conf</code>文件中添加如下一行：</p>
+<p><code>host    all             all             0.0.0.0/0              password</code></p>
+<p>来允许远程的主机使用密码验证登录。<br>然后修改当前目录下的<code>postgresql.conf</code>文件，找到<br><code>#listen_addresses=’localhost’</code>修改为<code>listen_addresses=’*’</code>，即去掉注释，修改为允许所有地址访问。<br>修改完成后重新启动服务器即可生效。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjc46buy50008efjeox8jqtig" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/22/在CentOS7系统上安装和配置PostgreSQL/" data-id="cjcg088he0003z4ogghrx3of6" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -329,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjc46buxz0005efjest12xw66" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/24/前端框架带来的改变/" data-id="cjcg088hk0006z4ogfdrlxp8r" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -421,7 +424,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjc46buxe0002efjedqvhhf96" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/14/从一个简单输入组件分析vue组件的使用和父子组件的通信/" data-id="cjcg088hc0002z4ogo6sbuoot" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -462,7 +465,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjc46buy30007efjemnuk25zt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/21/小程序自建组件/" data-id="cjcg088hl0007z4ogli3wxw3p" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -506,7 +509,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjc46buxj0004efjeu7z3q95n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/20/使用hexo将博客post到github-io/" data-id="cjcg088hi0005z4ogc4alr57l" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -556,7 +559,7 @@ toString() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjc46buxh0003efje1qv73zif" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/17/从微信公众号H5页面生成对应的小程序页面/" data-id="cjcg088hf0004z4ogwi67tff9" class="article-share-link">Поделиться</a>
       
       
     </footer>
@@ -581,7 +584,7 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Архив</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
@@ -591,7 +594,7 @@ toString() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Недавние записи</h3>
     <div class="widget">
       <ul>
         
@@ -628,7 +631,7 @@ toString() {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Создано с помощью <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
